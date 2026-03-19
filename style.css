@@ -240,12 +240,27 @@ body {
 }
 
 .substep-body { padding: 20px; }
-.substep-note {
+.skip-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 12px 0;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: #FFFBEB;
+  border-left: 4px solid var(--warning);
+}
+.skip-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.skip-title {
   font-size: 13px;
-  color: var(--gray-500);
-  text-decoration: underline;
-  margin-top: 10px;
+  font-weight: 700;
+  color: var(--warning);
   margin-bottom: 4px;
+}
+.skip-desc {
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.6;
 }
 .substep-desc {
   font-size: 14px;
