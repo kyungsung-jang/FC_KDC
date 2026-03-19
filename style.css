@@ -240,6 +240,13 @@ body {
 }
 
 .substep-body { padding: 20px; }
+.substep-note {
+  font-size: 13px;
+  color: var(--gray-500);
+  text-decoration: underline;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
 .substep-desc {
   font-size: 14px;
   color: var(--gray-600);
