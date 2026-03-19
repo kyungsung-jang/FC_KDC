@@ -432,9 +432,10 @@ body {
 .footer-info a:hover { color: var(--primary); }
 
 .footer-copy {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gray-400);
   margin-top: 4px;
+  white-space: nowrap;
 }
 
 
