@@ -73,6 +73,39 @@
     });
   }
 
+  // ── 빠른 이동 버튼 ───────────────────────────────────────
+  document.querySelectorAll('.quick-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var route = btn.dataset.route;
+      activateStep(btn.dataset.goto);
+      if (route) {
+        activateRoute(route);
+      }
+    });
+  });
+
+  // ── 루트 선택 (3단계 내부) ────────────────────────────────
+  function activateRoute(routeId) {
+    document.querySelectorAll('.route-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.route === routeId);
+    });
+    document.querySelectorAll('.route-panel').forEach(function (panel) {
+      var isActive = panel.id === 'route-' + routeId;
+      panel.classList.toggle('active', isActive);
+      if (isActive) {
+        panel.removeAttribute('hidden');
+      } else {
+        panel.setAttribute('hidden', '');
+      }
+    });
+  }
+
+  document.querySelectorAll('.route-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activateRoute(btn.dataset.route);
+    });
+  });
+
   // ── 이미지 에러 처리 ──────────────────────────────────────
   document.querySelectorAll('.substep-img').forEach(function (img) {
     img.addEventListener('error', function () {
