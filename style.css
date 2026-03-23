@@ -290,8 +290,9 @@ body {
   margin: 16px 0;
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid var(--gray-200);
+  border: 1px solid #D1D5DB;
   background: var(--gray-100);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .substep-img {
   display: block;
