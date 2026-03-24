@@ -88,6 +88,25 @@
       transform: scale(1.5);
       transform-origin: left center;
     }
+    /* 모바일: transform 제거, 높이 축소 */
+    @media (max-width: 640px) {
+      .substep-img { min-height: 200px; }
+      .img-card-wrap .substep-img,
+      .img-search-wrap .substep-img,
+      .img-apply-wrap .substep-img,
+      .img-fc-search-wrap .substep-img,
+      .img-fc-apply-wrap .substep-img {
+        height: 220px;
+        transform: none;
+        object-fit: cover;
+        object-position: left center;
+      }
+      .img-fc-search-wrap .substep-img { object-position: right center; }
+      .img-fc-apply-wrap .substep-img {
+        object-fit: contain;
+        object-position: center top;
+      }
+    }
   </style>
 </head>
 <body>
