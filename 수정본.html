@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내일배움카드 안내 가이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .substep-image-wrap {
+      border: 2px solid #9CA3AF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    .substep-img {
+      object-fit: cover;
+      object-position: left center;
+      min-height: 320px;
+      background: #fff;
+    }
+    .img-caption {
+      background: #F3F4F6;
+      border-top: 1px solid #9CA3AF;
+      color: #4B5563;
+      font-weight: 500;
+    }
+    /* 라이트박스 */
+    .substep-img { cursor: zoom-in; }
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+      user-select: none;
+    }
+    /* 패캠 수강신청 이미지 — 세로 긴 이미지 전체 축소 표시 */
+    .img-fc-apply-wrap .substep-img {
+      height: 500px;
+      min-height: unset;
+      object-fit: contain;
+      object-position: center top;
+    }
+    /* 패캠 과정검색 이미지 — 오른쪽 포커스 */
+    .img-fc-search-wrap .substep-img {
+      height: 460px;
+      min-height: unset;
+      object-position: right center;
+    }
+    /* 수강신청 이미지 확대 */
+    .img-apply-wrap .substep-img {
+      height: 460px;
+      min-height: unset;
+      transform: scale(1.3);
+      transform-origin: center center;
+    }
+    /* 고용24 과정검색 이미지 확대 — 네모 박스 중심 줌인 */
+    .img-search-wrap .substep-img {
+      height: 460px;
+      min-height: unset;
+      transform: scale(1.5);
+      transform-origin: center center;
+    }
+    /* 국민내일배움카드 이미지 확대 — 왼쪽 번호 영역 줌인 */
+    .img-card-wrap .substep-img {
+      height: 460px;
+      min-height: unset;
+      transform: scale(1.5);
+      transform-origin: left center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 고정 헤더 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="logo" id="logo-home-btn" aria-label="처음 페이지로 이동">
+        <span class="logo-icon">📋</span>
+        <div class="logo-text-wrap">
+          <span class="logo-brand">패스트캠퍼스</span>
+          <span class="logo-text">내일배움카드 가이드</span>
+        </div>
+      </button>
+      <nav class="step-tabs" role="tablist" aria-label="단계 탭">
+        <button class="tab-btn active" role="tab" data-step="1" aria-selected="true" aria-controls="panel-1">
+          <span class="tab-num">1</span>
+          <span class="tab-label">카드 신청</span>
+        </button>
+        <span class="tab-divider" aria-hidden="true">›</span>
+        <button class="tab-btn" role="tab" data-step="2" aria-selected="false" aria-controls="panel-2">
+          <span class="tab-num">2</span>
+          <span class="tab-label">카드 발급·등록</span>
+        </button>
+        <span class="tab-divider" aria-hidden="true">›</span>
+        <button class="tab-btn" role="tab" data-step="3" aria-selected="false" aria-controls="panel-3">
+          <span class="tab-num">3</span>
+          <span class="tab-label">수강신청·결제</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <main class="guide-wrap">
+
+    <!-- 인트로 -->
+    <div class="step-panel active" id="panel-0" data-step="0" role="region">
+      <div class="intro-wrap">
+        <div class="intro-badge">내일배움카드 신청 가이드</div>
+        <h1 class="intro-title">패스트캠퍼스 강의,<br />내일배움카드로 들어보세요</h1>
+        <p class="intro-desc">
+          내일배움카드를 처음 신청하시나요?<br />
+          신청부터 수강 결제까지, 단계별로 쉽게 안내해 드립니다.
+        </p>
+        <div class="eligibility-grid">
+          <!-- 발급 가능 -->
+          <div class="elig-box elig-ok">
+            <div class="elig-title">✅ 내일배움카드를<br />발급 받을 수 있어요</div>
+            <ul class="elig-list">
+              <li>🙋 업무 능력을 키우고 싶은 <strong>국민 누구나</strong></li>
+              <li>💼 재직자 (직장인)</li>
+              <li>🔍 구직자 (취업 준비생)</li>
+              <li>🏢 자영업자 · 프리랜서</li>
+            </ul>
+          </div>
+          <!-- 발급 어려움 -->
+          <div class="elig-box elig-no">
+            <div class="elig-title">⚠️ 내일배움카드 발급이<br />조금 어려워요</div>
+            <ul class="elig-list">
+              <li>🏛️ 공무원, 사립학교 교직원</li>
+              <li>👴 만 75세 이상</li>
+              <li>💰 대기업 근로자 중 월급 300만원 이상 &amp; 만 45세 미만</li>
+              <li>💸 월 소득 500만원 이상 특수형태근로종사자</li>
+              <li>🏪 사업 1년 미만이거나 연 매출 4억 이상 자영업자</li>
+              <li>🎓 수업연한 2년 이상 남은 대학(원)생, 고교 1~2학년</li>
+              <li>📋 생계급여 수급자 (조건부 수급자는 가능)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="intro-highlight">⏱ 5분이면 끝나요!</div>
+        <div class="intro-steps">
+          <div class="intro-step-item">
+            <span class="intro-step-num">1</span>
+            <span class="intro-step-label">카드 신청</span>
+          </div>
+          <span class="intro-step-arrow">›</span>
+          <div class="intro-step-item">
+            <span class="intro-step-num">2</span>
+            <span class="intro-step-label">카드 발급·등록</span>
+          </div>
+          <span class="intro-step-arrow">›</span>
+          <div class="intro-step-item">
+            <span class="intro-step-num">3</span>
+            <span class="intro-step-label">수강신청·결제</span>
+          </div>
+        </div>
+        <button class="start-btn" data-next="1">처음부터 시작하기 →</button>
+
+        <div class="quick-jump">
+          <p class="quick-jump-label">이미 진행 중이신가요?</p>
+          <div class="quick-jump-btns">
+            <button class="quick-btn" data-goto="2">
+              <span class="quick-btn-icon">📬</span>
+              <span class="quick-btn-text">카드 받았어요<br /><small>2단계: 카드 등록</small></span>
+            </button>
+            <button class="quick-btn" data-goto="3">
+              <span class="quick-btn-icon">🖥️</span>
+              <span class="quick-btn-text">수강신청이 필요해요<br /><small>3단계: 수강신청·결제</small></span>
+            </button>
+            <button class="quick-btn" data-goto="3" data-route="B">
+              <span class="quick-btn-icon">💳</span>
+              <span class="quick-btn-text">결제만 남았어요<br /><small>3단계: 패스트캠퍼스 결제</small></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1단계: 카드 신청 -->
+    <div class="step-panel" id="panel-1" data-step="1" role="tabpanel" aria-labelledby="tab-1" hidden>
+      <div class="step-header">
+        <div class="step-badge">STEP 1</div>
+        <h2 class="step-title">내일배움카드 신청</h2>
+        <p class="step-desc">고용24에서 내일배움카드를 온라인으로 신청합니다.</p>
+      </div>
+
+      <ol class="substep-list">
+
+        <li class="substep">
+          <div class="substep-header">
+            <span class="substep-num">1</span>
+            <h3 class="substep-title">고용24 접속 및 회원가입</h3>
+          </div>
+          <div class="substep-body">
+            <p class="substep-desc">고용24 공식 사이트에 접속하여 회원가입을 완료합니다. 이미 계정이 있다면 로그인하세요.</p>
+            <ul class="checklist">
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>주민등록번호 또는 외국인등록번호 필요</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>본인 명의 휴대폰 번호로 인증</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>이메일 주소 등록 (결과 알림 수신)</span></li>
+            </ul>
+            <div class="substep-image-wrap">
+              <img src="images/고용24회원가입.png" alt="고용24 회원가입 화면 스크린샷" class="substep-img" loading="lazy" />
+              <div class="img-caption">고용24 회원가입 화면</div>
+            </div>
+            <a class="link-btn" href="https://www.hrd.go.kr" target="_blank" rel="noopener noreferrer">
+              🌐 고용24 바로가기
+            </a>
+          </div>
+        </li>
+
+        <li class="substep">
+          <div class="substep-header">
+            <span class="substep-num">2</span>
+            <h3 class="substep-title">내일배움카드 신청 메뉴 찾기</h3>
+          </div>
+          <div class="substep-body">
+            <p class="substep-desc">로그인 후 메뉴에서 내일배움카드 신청 페이지로 이동합니다.</p>
+            <ul class="checklist">
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>상단 메뉴 <strong>[직업 능력 개발]</strong> 클릭</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span><strong>[국민내일배움카드]</strong> 선택</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span><strong>[발급 신청]</strong> 메뉴 클릭</span></li>
+            </ul>
+            <div class="substep-image-wrap">
+              <img src="images/신청메뉴찾기.png" alt="고용24 내일배움카드 메뉴 위치 스크린샷" class="substep-img" loading="lazy" />
+              <div class="img-caption">메뉴 위치 안내</div>
+            </div>
+          </div>
+        </li>
+
+        <li class="substep">
+          <div class="substep-header">
+            <span class="substep-num">3</span>
+            <h3 class="substep-title">신청서 작성 및 제출</h3>
+          </div>
+          <div class="substep-body">
+            <p class="substep-desc">신청서 양식에 따라 정보를 입력하고 제출합니다.</p>
+            <ul class="checklist">
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>고용보험 가입 여부 확인 (직장인 / 구직자 선택)</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>훈련 희망 분야 입력</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>카드 수령 주소 정확히 기재</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>신청 완료 후 문자 알림 수신 확인</span></li>
+            </ul>
+            <div class="substep-image-wrap">
+              <img src="images/신청서작성.png" alt="내일배움카드 신청서 작성 화면 스크린샷" class="substep-img" loading="lazy" />
+              <div class="img-caption">신청서 작성 화면</div>
+            </div>
+            <div class="info-box">
+              <span class="info-icon" aria-hidden="true">ℹ️</span>
+              <p>신청 후 <strong>심사 기간 약 5영업일</strong>이 소요됩니다. 심사 결과는 문자와 이메일로 안내됩니다.</p>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+
+      <div class="step-next">
+        <p>카드 신청이 완료되었나요?</p>
+        <div class="step-nav-btns">
+          <button class="prev-step-btn" data-prev="0">← 처음으로</button>
+          <button class="next-step-btn" data-next="2">2단계: 카드 발급·등록 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2단계: 카드 발급 및 등록 -->
+    <div class="step-panel" id="panel-2" data-step="2" role="tabpanel" aria-labelledby="tab-2" hidden>
+      <div class="step-header">
+        <div class="step-badge">STEP 2</div>
+        <h2 class="step-title">카드 발급 및 등록</h2>
+        <p class="step-desc">카드가 집으로 배송되면 고용24에서 카드를 등록합니다.</p>
+      </div>
+
+      <ol class="substep-list">
+
+        <li class="substep">
+          <div class="substep-header">
+            <span class="substep-num">1</span>
+            <h3 class="substep-title">카드 수령 확인</h3>
+          </div>
+          <div class="substep-body">
+            <p class="substep-desc">심사 승인 후 내일배움카드가 등록 주소로 우편 배송됩니다.</p>
+            <ul class="checklist">
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>배송 기간: 승인 후 <strong>약 7~14일</strong> 소요</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>카드 봉투 및 안내문 함께 확인</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>카드 뒷면 서명 필수</span></li>
+            </ul>
+            <div class="info-box">
+              <span class="info-icon" aria-hidden="true">📱</span>
+              <p><strong>모바일 신청의 경우,</strong> 선택하신 은행에서 안내되는 '내일배움카드' 발급 안내 문자 수령 후 <strong>은행 카드 앱</strong>을 통해 발급 신청해주세요.</p>
+            </div>
+            <div class="info-box warning">
+              <span class="info-icon" aria-hidden="true">⚠️</span>
+              <p>카드 수령 전에는 수강신청이 불가합니다. 배송이 지연될 경우 고용센터(1350)로 문의하세요.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="substep">
+          <div class="substep-header">
+            <span class="substep-num">2</span>
+            <h3 class="substep-title">국민내일배움카드 등록 확인</h3>
+          </div>
+          <div class="substep-body">
+            <p class="substep-desc">카드를 받은 후 고용24에서 카드 정보를 확인합니다.</p>
+            <ul class="checklist">
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>고용24 로그인 → <strong>마이페이지</strong></span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span><strong>[직업훈련관리]</strong> 선택</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span><strong>[국민내일배움카드]</strong> 선택</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span><strong>[카드사용내역]</strong> 메뉴에서 카드 정보 확인</span></li>
+              <li><span class="check-icon" aria-hidden="true">✔</span><span>발급받은 카드 번호와 일치하는지 확인</span></li>
+            </ul>
+            <div class="substep-image-wrap img-card-wrap">
+              <img src="images/국민내일배움카드.png" alt="고용24 국민내일배움카드 카드사용내역 화면" class="substep-img" loading="lazy" />
+              <div class="img-caption">카드사용내역 확인 화면</div>
+            </div>
+            <a class="link-btn" href="https://www.work24.go.kr" target="_blank" rel="noopener noreferrer">
+              🌐 고용24 바로가기
+            </a>
+          </div>
+        </li>
+
+      </ol>
+
+      <div class="step-next">
+        <p>카드 등록이 완료되었나요?</p>
+        <div class="step-nav-btns">
+          <button class="prev-step-btn" data-prev="1">← 1단계로</button>
+          <button class="prev-step-btn home-step-btn" data-prev="0">🏠 처음으로</button>
+          <button class="next-step-btn" data-next="3">3단계: 수강신청·결제 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3단계: 수강신청 및 결제 -->
+    <div class="step-panel" id="panel-3" data-step="3" role="tabpanel" aria-labelledby="tab-3" hidden>
+      <div class="step-header">
+        <div class="step-badge">STEP 3</div>
+        <h2 class="step-title">수강신청 및 결제</h2>
+        <p class="step-desc">수강신청 방법은 두 가지 루트가 있습니다. 본인 상황에 맞는 루트를 선택해주세요.</p>
+      </div>
+
+      <!-- 루트 선택 -->
+      <div class="route-selector">
+        <button class="route-btn active" data-route="A">
+          <span class="route-label">루트 A</span>
+          <span class="route-icon">🖥️</span>
+          <span class="route-name">고용24에서 신청·결제</span>
+          <span class="route-flow">고용24 검색 → 수강신청 → 결제</span>
+        </button>
+        <button class="route-btn" data-route="B">
+          <span class="route-label">루트 B</span>
+          <span class="route-icon">🎓</span>
+          <span class="route-name">패스트캠퍼스에서 신청·결제</span>
+          <span class="route-flow">홈페이지 검색 → 결제 → 고용24 수강신청</span>
+        </button>
+      </div>
+
+      <!-- 루트 A: 고용24 -->
+      <div class="route-panel active" id="route-A">
+        <ol class="substep-list">
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">1</span>
+              <h3 class="substep-title">고용24에서 과정 검색</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">고용24 훈련과정 검색에서 수강할 과정을 찾습니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>상단 메뉴 <strong>직업 능력 개발 - 훈련 통합검색</strong> 클릭</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>검색어에 <strong>과정명</strong> 입력 또는 훈련기관명에 <strong>패스트캠퍼스</strong> or <strong>데이원컴퍼니</strong> 검색</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>검색이 안되시는 경우 훈련유형을 <strong>K-디지털기초역량훈련</strong>으로 선택</span></li>
+              </ul>
+              <div class="substep-image-wrap img-search-wrap">
+                <img src="images/고용24과정검색.png" alt="고용24 훈련과정 검색 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">고용24 훈련과정 검색 화면</div>
+              </div>
+              <a class="link-btn" href="https://www.work24.go.kr/hr/a/a/1100/trnnCrsInf0.do?dtlContextPath=&redirectUrl=%2Fa%2Fa%2F1100%2FtrnnCrsInf0Post.do&topArea=&dtlSmtmConcCtrlId=&dtlExnwMenuConcSecd=&programMenuIdentification=EBG020000000000&menuPurpSecd=EBM01&dtlPwdCfrmYn=&serverToday=20260324&currentMenuId=EBG020000510010&dtlForwardPolyUrl=&dtlMenuId=&dtlMenuPurpSecd=&area=&crseTracseSe=&ncs=&gvrnInstt=&selectNCSKeyword=&srchType=&requestURI=%2Fhr%2Fa%2Fa%2F1100%2FtrnnCrsInf0Post.do&action=trnnCrsInf0Post.do" target="_blank" rel="noopener noreferrer">
+                🔍 고용24 바로가기
+              </a>
+            </div>
+          </li>
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">2</span>
+              <h3 class="substep-title">수강신청</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">원하는 과정을 선택하여 수강신청을 합니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>과정 상세 페이지에서 <strong>수강신청</strong> 버튼 클릭</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>훈련 시작일·종료일 확인</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>훈련기관 약관 동의</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>수강신청을 누르면 개인정보 입력하는 신청서가 나오는데 본인 정보에 맞게 입력</span></li>
+              </ul>
+              <div class="substep-image-wrap img-apply-wrap">
+                <img src="images/수강신청.png" alt="수강신청 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">수강신청 화면</div>
+              </div>
+            </div>
+          </li>
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">3</span>
+              <h3 class="substep-title">내일배움카드로 결제</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">수강신청 후 내일배움카드로 자기부담금을 결제합니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>결제 방법에서 <strong>내일배움카드</strong> 선택</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>자기부담금 확인 (총 수강료의 10%)</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>간편인증으로 본인 확인 후 결제 완료</span></li>
+              </ul>
+              <div class="substep-image-wrap">
+                <img src="images/placeholder.svg" alt="내일배움카드 결제 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">결제 화면</div>
+              </div>
+              <div class="info-box success">
+                <span class="info-icon" aria-hidden="true">🎉</span>
+                <p>수강신청 및 결제 완료! 최종 등록이 완료되면 별도 연락드립니다.</p>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+
+      <!-- 루트 B: 패스트캠퍼스 -->
+      <div class="route-panel" id="route-B" hidden>
+        <ol class="substep-list">
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">1</span>
+              <h3 class="substep-title">패스트캠퍼스 홈페이지에서 과정 검색</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">패스트캠퍼스 공식 홈페이지에서 수강할 과정을 검색하고 선택합니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>패스트캠퍼스 홈페이지 접속 후 로그인</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>패스트캠퍼스 홈페이지 우측 상단에 있는 <strong>국비지원</strong> 메뉴 클릭</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>수강하려는 과정 선택하여 세부 내용 및 일정 확인 (<strong>KDC 크레딧</strong> 표기된 것 확인 필수)</span></li>
+              </ul>
+              <div class="substep-image-wrap img-fc-search-wrap">
+                <img src="images/패캠과정검색.png" alt="패스트캠퍼스 과정 검색 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">패스트캠퍼스 과정 검색 화면</div>
+              </div>
+              <a class="link-btn" href="https://fastcampus.co.kr/b2g_nbacademy" target="_blank" rel="noopener noreferrer">
+                🎓 패스트캠퍼스 바로가기
+              </a>
+            </div>
+          </li>
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">2</span>
+              <h3 class="substep-title">패스트캠퍼스에서 결제</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">과정 상세 페이지에서 내일배움카드 결제를 진행합니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>과정 페이지 내 <strong>수강신청하기</strong> 버튼 클릭</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>결제수단은 일반 신용카드로 선택 후 <strong>내일배움카드</strong>로 결제</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>타 카드로 결제 시 훈련생 등록 불가, 내일배움카드로만 수강 가능</span></li>
+              </ul>
+              <div class="substep-image-wrap">
+                <img src="images/패캠결제.png" alt="패스트캠퍼스 국비 결제 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">국비 결제 화면</div>
+              </div>
+              <div class="info-box warning">
+                <span class="info-icon" aria-hidden="true">⚠️</span>
+                <p>결제 후 <strong>고용24에서 수강신청을 반드시 완료</strong>해야 수강이 확정됩니다.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="substep">
+            <div class="substep-header">
+              <span class="substep-num">3</span>
+              <h3 class="substep-title">고용24에서 수강신청 완료</h3>
+            </div>
+            <div class="substep-body">
+              <p class="substep-desc">패스트캠퍼스 결제 후 고용24에서 수강신청을 추가로 진행해야 최종 확정됩니다.</p>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>결제 완료 후 안내받은 카카오톡 메시지에서 <strong>상품이용안내</strong> 클릭</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>신청한 과정이 맞는지 확인 후 수강신청 진행</span></li>
+                <li><span class="check-icon" aria-hidden="true">✔</span><span>수강신청이 완료되면 1~2일 내로 확인 후 훈련생 등록 예정</span></li>
+              </ul>
+              <div class="skip-box">
+                <span class="skip-icon">👆</span>
+                <div>
+                  <p class="skip-title">이미 수강신청을 완료하셨나요?</p>
+                  <p class="skip-desc">패스트캠퍼스에서 결제 전 고용24 수강신청을 먼저 진행하신 분은 이 단계를 건너뛰셔도 됩니다.</p>
+                </div>
+              </div>
+              <div class="substep-image-wrap img-fc-apply-wrap">
+                <img src="images/패캠수강신청.png" alt="고용24 수강신청 화면" class="substep-img" loading="lazy" />
+                <div class="img-caption">고용24 수강신청 화면</div>
+              </div>
+              <a class="link-btn" href="https://www.work24.go.kr" target="_blank" rel="noopener noreferrer">
+                🖥️ 고용24 바로가기
+              </a>
+              <div class="info-box success">
+                <span class="info-icon" aria-hidden="true">🎉</span>
+                <p>수강신청 및 결제 완료! 최종 등록이 완료되면 별도 연락드립니다.</p>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+
+      <div class="step-next">
+        <div class="step-nav-btns">
+          <button class="prev-step-btn" data-prev="2">← 2단계로</button>
+          <button class="prev-step-btn home-step-btn" data-prev="0">🏠 처음으로</button>
+        </div>
+      </div>
+
+      <div class="step-complete">
+        <div class="complete-icon" aria-hidden="true">🎊</div>
+        <h3>모든 단계가 완료되었습니다!</h3>
+        <p>내일배움카드 신청부터 수강신청까지 모두 마치셨습니다.<br />궁금한 점이 있으면 담당자에게 연락해 주세요.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-company">FAST CAMPUS (주) 데이원컴퍼니</p>
+      <p class="footer-info">
+        대표자 : 이강민 &nbsp;|&nbsp; 개인정보관리책임자 : 이강민 &nbsp;|&nbsp; 사업자 등록번호 : 810-86-00658 &nbsp;|&nbsp; 주소 : 서울특별시 강남구 테헤란로 231, 센터필드 WEST 6층, 7층
+      </p>
+      <p class="footer-info">
+        <a href="https://support.fastcampus.co.kr/hc/ko" target="_blank" rel="noopener noreferrer">고객센터</a> : 02-518-4831 &nbsp;|&nbsp;
+        <a href="mailto:help@fastcampus.co.kr">help@fastcampus.co.kr</a>
+        &nbsp;|&nbsp; 평일 10:00&ndash;18:00 (점심 12:00&ndash;13:00, 주말·공휴일 제외)
+      </p>
+      <p class="footer-copy">Copyright ⓒ2026 Fastcampus. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // 라이트박스
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.innerHTML = '<span class="lightbox-close">✕</span><img class="lightbox-img" />';
+    document.body.appendChild(overlay);
+
+    const lightboxImg = overlay.querySelector('.lightbox-img');
+
+    document.querySelectorAll('.substep-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        overlay.classList.add('active');
+      });
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) overlay.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
