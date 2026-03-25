@@ -316,6 +316,7 @@ body {
 /* 정보 박스 */
 .info-box {
   display: flex;
+  align-items: center;
   gap: 10px;
   padding: 12px 14px;
   border-radius: var(--radius);
@@ -327,7 +328,7 @@ body {
 }
 .info-box.warning  { background: var(--warning-light);  border-color: #FDE68A; }
 .info-box.success  { background: var(--success-light);  border-color: #BBF7D0; }
-.info-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+.info-icon { flex-shrink: 0; font-size: 15px; }
 
 /* 링크 버튼 (새 탭으로 이동) */
 .link-btn {
